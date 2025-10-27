@@ -3,6 +3,8 @@ import java.util.ArrayList;
 public class Basededatos {
     ArrayList<Cilindro> cilindros =  new ArrayList<>();
 
+    //el metodo constructor es el default, siempre hay uno default para cada clase
+
     //metodos void no devuelven valores si no que hacen logica
     public void agregarRegistro(int numeroSerial, String tipoDeGas, String dondeEsta, int metros){
         Cilindro Cilindro = new Cilindro(numeroSerial, tipoDeGas, dondeEsta, metros);
@@ -25,6 +27,11 @@ public class Basededatos {
         for(Cilindro cilindro : cilindros){
             System.out.println(cilindro);
         }
+    }
+
+
+    public int size(){
+        return cilindros.size();
     }
 
     /*

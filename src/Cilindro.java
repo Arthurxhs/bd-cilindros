@@ -51,5 +51,24 @@ public class Cilindro {
     public int getNumeroSerial() {
         return numeroSerial;
     }
+
+    public String getTipoDeGas() {
+        return  tipoDeGas;
+    }
+
+    public void setTipoDeGas(String tipoDeGas) {
+        this.tipoDeGas = tipoDeGas;
+    }
+
+    public String getDondeEsta() {
+        return dondeEsta;
+    }
+
+    public void  setDondeEsta(String dondeEsta) {this.dondeEsta = dondeEsta;}
+
+    public int getMetros() {return metros;}
+
+    public void setMetros(int metros) {this.metros = metros;}
+
     public void setNumeroSerial(int pNumeroSerial) {numeroSerial =  pNumeroSerial;}
 }

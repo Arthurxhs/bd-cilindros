@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-
-public class Basededatos {
-    ArrayList<Cilindro> cilindros =  new ArrayList<>();
+public class ArrayList {
+    java.util.ArrayList<Cilindro> cilindros =  new java.util.ArrayList<>();
 
     //el metodo constructor es el default, siempre hay uno default para cada clase
 

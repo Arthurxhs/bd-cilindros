@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        Basededatos bd = new Basededatos();
+        ArrayList bd = new ArrayList();
 
         System.out.println("Hola esta es la base de datos de Oxigas del tolima para guardar y verificar sus cilindros");
 

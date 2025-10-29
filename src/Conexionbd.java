@@ -11,7 +11,7 @@ su propio constructor el cual usamos para crear la variable conexion con "Connec
 entonces por eso pone null? para que pueda sostenerse vacio y por que no usa el new*/
 public class Conexionbd {
     //credenciales de la base de datos
-    private static final String URL = "jdbc:mysql://localhost:3306/novel_world";
+    private static final String URL = "jdbc:mysql://localhost:3306/cilindros";
     private static final String USER = "root";
     private static final String PASSWORD = "Yosoymipropiodios1*";
 

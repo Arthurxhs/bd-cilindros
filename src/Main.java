@@ -31,10 +31,10 @@ public class Main {
                     System.out.println("Ingrese de cuantos metros es el cilindro");
                     int metros = sc.nextInt();
 
-                    Cilindro cilindro = new Cilindro(numeroSerial, tipoGas, donde, metros);
+                    bd.agregarRegistro(numeroSerial, tipoGas, donde, metros);
 
-                    //bd.agregarRegistro(numeroSerial, tipoGas, donde, metros);
-                    //crea la instancia
+                    /*Cilindro cilindro = new Cilindro(numeroSerial, tipoGas, donde, metros);
+                    crea la instancia
                     CilindroDao cilindroDao = new CilindroDao();
                     boolean operacion = cilindroDao.insertarCilindro(cilindro);
 
@@ -42,7 +42,7 @@ public class Main {
                         System.out.println("Cilindro insertado exitosamente");
                     } else {
                         System.out.println("No se pudo insertar el cilindro");
-                    }
+                    }*/
 
                     System.out.println("Este es el cilindro recien registrado: " + bd.getCilindro(bd.size()));
                     break;

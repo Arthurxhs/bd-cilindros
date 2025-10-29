@@ -10,7 +10,7 @@ public class CilindroDao {
 
     public boolean insertarCilindro(Cilindro cilindro){
         //aparte de que la variable tendra un string tambien tiene final o sea que nunca cambiara
-        final String SQL_INSERT = "INSERT INTO cilindros (numero_serial, tipo_de_gas, donde_Esta, metros) VALUES (?, ?, ?, ?)";
+        final String SQL_INSERT = "INSERT INTO registro_cilindros (numero_serial, tipo_de_gas, donde_esta, metros) VALUES (?, ?, ?, ?)";
 
         //aqui crea una conexion en la variable Connection, llamando al metodo Conectar de la clase Conexionbd
         //el tipo de variable conn es Connection por que el metodo Conectar usa metodos que son de interfaz
@@ -36,4 +36,9 @@ public class CilindroDao {
         }
     }
 
+    public static void main(String[] args) {
+        Cilindro cilindro = new Cilindro(123123, "argon", "bogota", 8);
+        CilindroDao dao = new CilindroDao();
+        dao.insertarCilindro(cilindro);
+    }
 }

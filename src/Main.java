@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        ArrayList bd = new ArrayList();
+        //ArrayList arrayList = new ArrayList();
 
         System.out.println("Hola esta es la base de datos de Oxigas del tolima para guardar y verificar sus cilindros");
 
@@ -31,28 +31,33 @@ public class Main {
                     System.out.println("Ingrese de cuantos metros es el cilindro");
                     int metros = sc.nextInt();
 
-                    bd.agregarRegistro(numeroSerial, tipoGas, donde, metros);
+                    //el arrayList crea la instancia de cilindro dentro de su metodo
+                    //arrayList.agregarRegistro(numeroSerial, tipoGas, donde, metros);
 
-                    /*Cilindro cilindro = new Cilindro(numeroSerial, tipoGas, donde, metros);
-                    crea la instancia
+                    //crea el cilindro donde se guardaran los datos del cilindro
+                    Cilindro cilindro = new Cilindro(numeroSerial, tipoGas, donde, metros);
+                    //crea la instancia de la clase donde se encuentra el metodo que necesitamos
                     CilindroDao cilindroDao = new CilindroDao();
+                    /*aqui guardamos el resultado que nos devuelve el metodo que es de tipo boolean
+                    y necesita a la instancia cilindro como parametro, la clase cilindro dao solo
+                    existe para acceder al metodo que establecimos, y el metodo accede a la interfaz Connection*/
                     boolean operacion = cilindroDao.insertarCilindro(cilindro);
 
                     if(operacion) {
                         System.out.println("Cilindro insertado exitosamente");
                     } else {
                         System.out.println("No se pudo insertar el cilindro");
-                    }*/
+                    }
 
-                    System.out.println("Este es el cilindro recien registrado: " + bd.getCilindro(bd.size()));
+                    System.out.println("Este es el cilindro recien registrado: " + arrayList.getCilindro(arrayList.size()));
                     break;
 
                 case 2:
                     System.out.println("Todos los cilindros actualmente en la base de datos son:");
-                    if(bd.size() == 0) {
+                    if(arrayList.size() == 0) {
                         System.out.println("No tienes ningun cilindro registrado actualmente");
                     } else {
-                        bd.listaDeCilindro();
+                        arrayList.listaDeCilindro();
                     }
                     break;
 
@@ -62,7 +67,7 @@ public class Main {
 
                     int searchId = sc.nextInt();
 
-                    Cilindro cilindroEdicion = bd.getCilindro(searchId);
+                    Cilindro cilindroEdicion = arrayList.getCilindro(searchId);
 
                     if (cilindroEdicion != null) {
                         subMenu2();

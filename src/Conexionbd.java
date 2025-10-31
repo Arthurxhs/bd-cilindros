@@ -46,9 +46,9 @@ public class Conexionbd {
         return conexion;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         /*tener en cuenta que Connection es digamos un metodo de la interfaz SQL conection, entonces primero para que nuestra clase pueda
-        acceder a esos metodos de la interfaz necesita ser de ese tipo de interfaz, o sea connection*/
+        acceder a esos metodos de la interfaz necesita ser de ese tipo de interfaz, o sea connection
         Connection conexion = Conectar();
 
         //cerrar la conexion cuando la termine de usar
@@ -62,5 +62,5 @@ public class Conexionbd {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 }

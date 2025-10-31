@@ -1,8 +1,8 @@
 public class Cilindro {
     //static significa que es parametro de la clase no de cada objeto
-    static int contadorId = 0;
+    //static int contadorId = 0;
     //final una vez asignado no puede ser cambiado
-    final int iD;
+    /*final*/ int iD;
     int numeroSerial;
     String tipoDeGas;
     String dondeEsta;
@@ -10,7 +10,7 @@ public class Cilindro {
 
     public Cilindro(int numeroSerial,  String tipoDeGas, String dondeEsta, int metros) {
 
-        this.iD = ++contadorId;
+        //this.iD = ++contadorId;
         this.numeroSerial = numeroSerial;
         this.tipoDeGas = tipoDeGas;
         this.dondeEsta = dondeEsta;
@@ -31,6 +31,8 @@ public class Cilindro {
     }
 
     @Override
+    //defaultmente el toString devuelve el id del objeto no mas, pero id de java no el de la instancia
+    //lo sobreescribo para que ahora muestre esto
     public String toString(){
         return "\n Cilindro: " +
                 "\n id: " + iD +
@@ -62,6 +64,14 @@ public class Cilindro {
 
     public String getDondeEsta() {
         return dondeEsta;
+    }
+
+    public void setId(int id){
+        this.iD = id;
+    }
+
+    public int getId(){
+        return iD;
     }
 
     public void  setDondeEsta(String dondeEsta) {this.dondeEsta = dondeEsta;}

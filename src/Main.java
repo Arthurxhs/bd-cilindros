@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -52,18 +54,30 @@ public class Main {
                     //System.out.println("Este es el cilindro recien registrado: " + arrayList.getCilindro(arrayList.size()));
                     System.out.println("Este es el cilindro recien registrado: " + cilindroDao.getCilindro(numeroSerial));
                     break;
-/*
+
                 case 2:
                     System.out.println("Todos los cilindros actualmente en la base de datos son:");
-                    if(arrayList.size() == 0) {
+                    /*if(arrayList.size() == 0) {
                         System.out.println("No tienes ningun cilindro registrado actualmente");
                     } else {
                         arrayList.listaDeCilindro();
+                    }*/
+
+                    CilindroDao cilindroDao2 = new CilindroDao();
+                    int total = cilindroDao2.getTotalRegistros();
+                    List<Cilindro> listaTotal = cilindroDao2.Registros();
+
+                    if( total > 0) {
+                        for (Cilindro objectCilindro : listaTotal) {
+                            System.out.println(objectCilindro.toString());
+                        }
+                    } else {
+                        System.out.println("No hay ningun cilindro registrado en la  base de datos");
                     }
                     break;
 
 
-                case 3:
+               /* case 3:
                     System.out.println("Ingrese el id del cilindro al que quiere editar/modificar");
 
                     int searchId = sc.nextInt();

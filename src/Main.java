@@ -77,14 +77,14 @@ public class Main {
                     break;
 
 
-               /* case 3:
+                case 3:
                     System.out.println("Ingrese el id del cilindro al que quiere editar/modificar");
-
                     int searchId = sc.nextInt();
 
-                    Cilindro cilindroEdicion = arrayList.getCilindro(searchId);
+                    CilindroDao cilindroDao3 = new CilindroDao();
+                    Cilindro cilindroBuscado = cilindroDao3.getCilindro(searchId);
 
-                    if (cilindroEdicion != null) {
+                    if (cilindroBuscado != null) {
                         subMenu2();
 
                         int opcionElegida2 = sc.nextInt();
@@ -93,46 +93,46 @@ public class Main {
                         switch (opcionElegida2) {
 
                             case 1:
-                                System.out.println("Numero serial actual: " +  cilindroEdicion.getNumeroSerial());
+                                System.out.println("Numero serial actual: " + cilindroBuscado.getNumeroSerial());
                                 System.out.println("Ingresa el numero serial nuevo: ");
 
                                 int numeroSerialNew = sc.nextInt();
                                 sc.nextLine();
 
-                                cilindroEdicion.setNumeroSerial(numeroSerialNew);
+                                cilindroBuscado.setNumeroSerial(numeroSerialNew);
 
-                                System.out.println("Numero Serial Actualizado a: " + cilindroEdicion.getNumeroSerial());
+                                System.out.println("Numero Serial Actualizado a: " + cilindroBuscado.getNumeroSerial());
                                 break;
 
                             case 2:
-                                System.out.println("Tipo de Gas actual del cilindro a: " + cilindroEdicion.getTipoDeGas());
+                                System.out.println("Tipo de Gas actual del cilindro a: " + cilindroBuscado.getTipoDeGas());
                                 System.out.println("Ingresa el nuevo tipo de gas del cilindro: ");
                                 String tipoGasNew = sc.nextLine();
 
-                                cilindroEdicion.setTipoDeGas(tipoGasNew);
+                                cilindroBuscado.setTipoDeGas(tipoGasNew);
 
-                                System.out.println("El tipo de gas del cilindro se ha actualizado a: " + cilindroEdicion.getTipoDeGas());
+                                System.out.println("El tipo de gas del cilindro se ha actualizado a: " + cilindroBuscado.getTipoDeGas());
                                 break;
 
                             case 3:
-                                System.out.println("El cilindro se encuentra actualmente en: " + cilindroEdicion.getDondeEsta());
+                                System.out.println("El cilindro se encuentra actualmente en: " + cilindroBuscado.getDondeEsta());
                                 System.out.println("Ingresa el nuevo lugar donde se encuentra el cilindro: ");
                                 String lugarNew = sc.nextLine();
 
-                                cilindroEdicion.setDondeEsta(lugarNew);
+                                cilindroBuscado.setDondeEsta(lugarNew);
 
-                                System.out.println("Se ha actualizado el lugar donde se encuentra el cilindro: " + cilindroEdicion.getDondeEsta());
+                                System.out.println("Se ha actualizado el lugar donde se encuentra el cilindro: " + cilindroBuscado.getDondeEsta());
                                 break;
 
                             case 4:
-                                System.out.println("El cilindro es de " + cilindroEdicion.getMetros() + " metros");
+                                System.out.println("El cilindro es de " + cilindroBuscado.getMetros() + " metros");
                                 System.out.println("Ingresa los metros del cilindro nuevamente: ");
 
                                 int metrosNew = sc.nextInt();
 
-                                cilindroEdicion.setMetros(metrosNew);
+                                cilindroBuscado.setMetros(metrosNew);
 
-                                System.out.println("Los metros del cilindro se han actualizado correctamente a: " + cilindroEdicion.getMetros());
+                                System.out.println("Los metros del cilindro se han actualizado correctamente a: " + cilindroBuscado.getMetros());
                                 break;
 
                             default:
@@ -140,11 +140,23 @@ public class Main {
 
                         }
 
+                        //actualizacion del objeto
+                        boolean exito = cilindroDao3.getCilindroUpdate(cilindroBuscado);
+                        if(exito) {
+                            System.out.println("Se pudo actualizar el cilindro en la bd");
+                        }
+
+                        //Mostrar el cilindro actualizado
+                        Cilindro cilindroActualizado = cilindroDao3.getCilindro(searchId);
+                        System.out.println(cilindroActualizado.toString());
+
                     } else {
                         System.out.println("No hay un cilindro registrado con ese id");
                     };
+
+
                 break;
-*/
+
                 case 0:
                     return;//devuelve un valor null
 

@@ -46,10 +46,6 @@ public class Cilindro {
         return this;
     }*/
 
-    public int getiD() {
-        return iD;
-    }
-
     public int getNumeroSerial() {
         return numeroSerial;
     }

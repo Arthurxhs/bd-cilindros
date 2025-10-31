@@ -40,15 +40,15 @@ public class CilindroDao {
         }
     }
 
-    public Cilindro getCilindro(int numeroSerial){
-        final String SQL_GET = "SELECT * FROM registro_cilindros WHERE numero_serial = ?";
+    public Cilindro getCilindro(int id){
+        final String SQL_GET = "SELECT * FROM registro_cilindros WHERE id = ?";
         Cilindro cilindro = null;
 //se guarda la conexion hecha en conn donde ejecutaremos los query
         try (Connection conn = Conexionbd.Conectar();
              //ahora esta variable guardara la sentencia que esta como string a query y despues
             PreparedStatement ps = conn.prepareStatement(SQL_GET/*, Statement.RETURN_GENERATED_KEYS*/)) {
 //se usa el metodo en la variable ps para insertar los parametros del query
-            ps.setInt(1, numeroSerial);
+            ps.setInt(1, id);
 
 
             //Despues de tener el string a query e insertar los parametros, se envia para que se ejecute
@@ -130,6 +130,32 @@ public class CilindroDao {
         }
 
         return registros;
+    }
+
+    public boolean getCilindroUpdate(Cilindro cilindroUpdate){
+        final String SQL_UPDATE = "UPDATE registro_cilindros SET numero_serial = ?, tipo_de_gas = ?, donde_esta = ?, metros = ? WHERE id = ?";
+
+        try(
+                Connection conn = Conexionbd.Conectar();
+                PreparedStatement ps = conn.prepareStatement(SQL_UPDATE)
+        ) {
+
+            ps.setInt(1, cilindroUpdate.getNumeroSerial());
+            ps.setString(2, cilindroUpdate.getTipoDeGas());
+            ps.setString(3, cilindroUpdate.getDondeEsta());
+            ps.setInt(4, cilindroUpdate.getMetros());
+
+            ps.setInt(5, cilindroUpdate.getId());
+
+            int filasAfectadas =  ps.executeUpdate();
+
+            return filasAfectadas > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Error al consultar el cilindro");
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /*public static void main(String[] args) {

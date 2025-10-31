@@ -30,6 +30,7 @@ public class Conexionbd {
 
             siempre que un metodo y variable este etiquetado como un tipo de interfaz entonces esta obligado a contrado
             * */
+            //aqui se guarda la conexion a la base de datos aqui que usaremos esta variable para ejecutar todo lo relacionado  a la bd
             conexion = DriverManager.getConnection(URL, USER, PASSWORD);
 
             if(conexion != null){

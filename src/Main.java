@@ -49,9 +49,10 @@ public class Main {
                         System.out.println("No se pudo insertar el cilindro");
                     }
 
-                    System.out.println("Este es el cilindro recien registrado: " + arrayList.getCilindro(arrayList.size()));
+                    //System.out.println("Este es el cilindro recien registrado: " + arrayList.getCilindro(arrayList.size()));
+                    System.out.println("Este es el cilindro recien registrado: " + cilindroDao.getCilindro(numeroSerial));
                     break;
-
+/*
                 case 2:
                     System.out.println("Todos los cilindros actualmente en la base de datos son:");
                     if(arrayList.size() == 0) {
@@ -129,7 +130,7 @@ public class Main {
                         System.out.println("No hay un cilindro registrado con ese id");
                     };
                 break;
-
+*/
                 case 0:
                     return;//devuelve un valor null
 

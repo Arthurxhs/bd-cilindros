@@ -1,5 +1,7 @@
 //interfaz
 import java.sql.*;
+import java.util.List;
+import java.util.ArrayList;
 //
 //
 
@@ -17,7 +19,7 @@ public class CilindroDao {
         //el tipo de variable conn es Connection por que el metodo Conectar usa metodos que son de interfaz
         try (Connection conn = Conexionbd.Conectar();
              //esta ejecutando dos cosas en mysql una insercion de un objeto y pidiendo las llaves generadas automaticamente o sea el id
-            PreparedStatement ps = conn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)) {
+            PreparedStatement ps = conn.prepareStatement(SQL_INSERT /*,Statement.RETURN_GENERATED_KEYS*/)) {
 
             //el primer indice se mapea el numero serial, indices van en orden ?(1). ?(2), ?(3), ?(4)
             ps.setInt(1, cilindro.getNumeroSerial());
@@ -38,26 +40,35 @@ public class CilindroDao {
         }
     }
 
-    public Cilindro getCilindro(int id){
+    public Cilindro getCilindro(int numeroSerial){
         final String SQL_GET = "SELECT * FROM registro_cilindros WHERE numero_serial = ?";
         Cilindro cilindro = null;
-
+//se guarda la conexion hecha en conn donde ejecutaremos los query
         try (Connection conn = Conexionbd.Conectar();
-            PreparedStatement ps = conn.prepareStatement(SQL_GET)){
+             //ahora esta variable guardara la sentencia que esta como string a query y despues
+            PreparedStatement ps = conn.prepareStatement(SQL_GET/*, Statement.RETURN_GENERATED_KEYS*/)) {
+//se usa el metodo en la variable ps para insertar los parametros del query
+            ps.setInt(1, numeroSerial);
 
-            ps.setInt(1, id);
 
-            //ejecuta la consulta ps y el resultado se guarda en rs
+            //Despues de tener el string a query e insertar los parametros, se envia para que se ejecute
+            //y este se guarda en una variable Resulset para usar los parametros de este sobre el resultado obtenido sobre
+            //esa misma variable
             try (ResultSet rs = ps.executeQuery()){
                 //el .next convierte la respuesta a un objeto java
                 if (rs.next()) {
+                    //capturo el id en una variable aparte y la inserto en la variable de la clase
+                    int idCilindro = rs.getInt("id");
+
                     cilindro = new Cilindro(
-                            //rs.getInt("id"), no se puede tener aqui ya que no tengo donde guardarlo
                             rs.getInt("numero_serial"),
                             rs.getString("tipo_de_gas"),
                             rs.getString("donde_esta"),
                             rs.getInt("metros")
                     );
+
+                    //la inserto en la variable de la clase
+                    cilindro.setId(idCilindro);
                 }
             }
 
@@ -69,9 +80,61 @@ public class CilindroDao {
         return cilindro;
     }
 
-    public static void main(String[] args) {
+    public int getTotalRegistros(){
+        final String SQL_GET = "SELECT COUNT(*) FROM registro_cilindros";
+        int totalRegistros = 0;
+
+        try (Connection conn = Conexionbd.Conectar();
+            PreparedStatement ps = conn.prepareStatement(SQL_GET);
+            ResultSet rs =  ps.executeQuery()) {
+
+            if (rs.next()) {
+                totalRegistros = rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al consultar el cilindro");
+            e.printStackTrace();
+        }
+        return totalRegistros;
+    }
+
+    //no entiendo por que una lista y no un arrayLista
+    public List<Cilindro> Registros(){
+        final String SQL_GET = "SELECT * FROM registro_cilindros";
+        List<Cilindro> registros = new ArrayList<>();
+
+        try(
+                Connection conn = Conexionbd.Conectar();
+                PreparedStatement ps = conn.prepareStatement(SQL_GET);
+                ResultSet rs =  ps.executeQuery()
+                ){
+
+            //por que da error el if y toca usar el while
+                while(rs.next()) {
+                    Cilindro cilindro = new Cilindro(
+                            rs.getInt("numero_serial"),
+                            rs.getString("tipo_de_gas"),
+                            rs.getString("donde_esta"),
+                            rs.getInt("metros")
+                    );
+
+                    cilindro.setId(rs.getInt("id"));
+
+                    registros.add(cilindro);
+                }
+
+        }catch (SQLException e) {
+            System.out.println("Error al consultar el cilindro");
+            e.printStackTrace();
+        }
+
+        return registros;
+    }
+
+    /*public static void main(String[] args) {
         Cilindro cilindro = new Cilindro(123123, "argon", "bogota", 8);
         CilindroDao dao = new CilindroDao();
         dao.insertarCilindro(cilindro);
-    }
+    }*/
 }

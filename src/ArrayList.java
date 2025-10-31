@@ -1,4 +1,4 @@
-public class ArrayList {
+/*public class ArrayList {
     java.util.ArrayList<Cilindro> cilindros =  new java.util.ArrayList<>();
 
     //el metodo constructor es el default, siempre hay uno default para cada clase
@@ -45,4 +45,3 @@ public String listaDeCilindro(){
     return sb.toString(); // Devuelve la cadena completa
 }
      */
-}

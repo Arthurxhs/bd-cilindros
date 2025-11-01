@@ -158,6 +158,27 @@ public class CilindroDao {
         }
     }
 
+    public boolean Eliminar(int Id){
+        final String SQL_DELETE = "DELETE FROM registro_cilindros WHERE id = ?";
+
+        try(
+                Connection conn = Conexionbd.Conectar();
+                PreparedStatement ps = conn.prepareStatement(SQL_DELETE);
+                ) {
+
+            ps.setInt(1, Id);
+
+            int rs = ps.executeUpdate();
+            return rs > 0;
+
+
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar el cilindro");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     /*public static void main(String[] args) {
         Cilindro cilindro = new Cilindro(123123, "argon", "bogota", 8);
         CilindroDao dao = new CilindroDao();

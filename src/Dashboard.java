@@ -64,7 +64,7 @@ public class Dashboard extends JFrame {
         //btnActualizar.addActionListener(e -> dao.insertarCilindro());
         //btnBuscar.addActionListener(e -> dao.getCilindro());
         //btnActualizarTabla.addActionListener(e -> dao.Registros());
-        //btnActualizar.addActionListener(e -> dao.);
+        btnActualizar.addActionListener(e -> accionEditar());
         btnEliminar.addActionListener(e -> accionEliminar());
         btnInsertar.addActionListener(e -> accionAgregar());
         /*btnCerrar.addActionListener(e -> {
@@ -74,8 +74,8 @@ public class Dashboard extends JFrame {
 
         panelBotones.add(btnEliminar);
         panelBotones.add(btnInsertar);
-        /*panelBotones.add(btnActualizar);
-        panelBotones.add(btnBuscar);
+        panelBotones.add(btnActualizar);
+        /*panelBotones.add(btnBuscar);
         panelBotones.add(btnActualizarTabla);
         panelBotones.add(btnCerrar);
         */
@@ -165,8 +165,6 @@ public class Dashboard extends JFrame {
 
         Cilindro cilindroOld = dao.getCilindro(idAEditar);
 
-        JOptionPane.showMessageDialog(this, "El registro seleccionado para su edicion es: " + cilindroOld);
-
         String[] opciones = {"numero Serial", "Tipo de Gas", "Donde se encuentra", "metros del cilindro"};
 
         // El último argumento indica el tipo de mensaje (puede ser QUESTION_MESSAGE, PLAIN_MESSAGE, etc.)
@@ -181,12 +179,89 @@ public class Dashboard extends JFrame {
                 opciones[0]     // Opción por defecto (la que tiene el foco)
         );
 
+        boolean actualizacionExitosa = false;
+
         switch (eleccion) {
             case 0:
                 String newNumberSerial =  JOptionPane.showInputDialog(this, "ingresa el numero serial nuevo para este cilindro: ");
+                int newNumberSerialInt = 0;
 
+                if(newNumberSerial != null) {
+                    try {
+                        newNumberSerialInt = Integer.parseInt(newNumberSerial);
 
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "Error: Debe ingresar un numero valido", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
 
+                cilindroOld.setNumeroSerial(newNumberSerialInt);
+
+                actualizacionExitosa = dao.getCilindroUpdate(cilindroOld);
+
+                if(actualizacionExitosa){
+                    JOptionPane.showMessageDialog(this, "El cilindro se ha actualizado con el nuevo numero serial " + cilindroOld.getNumeroSerial(), "Actualizacion", JOptionPane.INFORMATION_MESSAGE);
+                }
+                cargarDatosTabla();
+                break;
+
+            case 1:
+                String tipoDeGasNew = JOptionPane.showInputDialog(this, "ingresa el tipo de gas para este cilindro");
+
+                if(tipoDeGasNew != null) {
+                    try {
+                        cilindroOld.setTipoDeGas(tipoDeGasNew);
+                    } catch (IllegalArgumentException e) {
+                        JOptionPane.showMessageDialog(this, "hubo un error al actualizar el tipo de gas de este cilindro",  "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+
+                actualizacionExitosa = dao.getCilindroUpdate(cilindroOld);
+                if(actualizacionExitosa){
+                    JOptionPane.showMessageDialog(this, "El tipo de gas de este cilindro fue actualizado a " + tipoDeGasNew, "Actualizacion", JOptionPane.INFORMATION_MESSAGE);
+                }
+                cargarDatosTabla();
+                break;
+
+            case 2:
+                String dondeEstaNew = JOptionPane.showInputDialog(this, "ingresa la nueva ubicacion de donde se encuentra el cilindro");
+
+                if(dondeEstaNew != null) {
+                    try {
+                        cilindroOld.setDondeEsta(dondeEstaNew);
+                    } catch (IllegalArgumentException e) {
+                        JOptionPane.showMessageDialog(this, "hubo un error actualizando el donde se encuentra el ciindro" + e);
+                    }
+
+                    actualizacionExitosa = dao.getCilindroUpdate(cilindroOld);
+
+                    if(actualizacionExitosa){
+                        JOptionPane.showMessageDialog(this, "Se ha actualizado el donde se encuentra este cilindro a" + dondeEstaNew, "Actualizacion", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+                cargarDatosTabla();
+                break;
+
+            case 3:
+                String metrosNew = JOptionPane.showInputDialog(this, "ingresa los nuevos metros del cilindro:");
+                int metrosInt = 0;
+
+                if(metrosNew != null) {
+                    metrosInt = Integer.parseInt(metrosNew);
+                    cilindroOld.setMetros(metrosInt);
+                    try {
+                        actualizacionExitosa = dao.insertarCilindro(cilindroOld);
+                    }catch (IllegalArgumentException e) {
+                        JOptionPane.showMessageDialog(this, "No fue posible actualizar los metros del cilindro " + e,  "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+
+                if(actualizacionExitosa){
+                    JOptionPane.showMessageDialog(this, "Los metros se actualizaron a: " + metrosInt);
+                }
+
+                cargarDatosTabla();
+                break;
         }
     }
 

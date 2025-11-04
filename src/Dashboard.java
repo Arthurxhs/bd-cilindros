@@ -170,7 +170,7 @@ public class Dashboard extends JFrame {
         String[] opciones = {"numero Serial", "Tipo de Gas", "Donde se encuentra", "metros del cilindro"};
 
         // El último argumento indica el tipo de mensaje (puede ser QUESTION_MESSAGE, PLAIN_MESSAGE, etc.)
-        int seleccion = JOptionPane.showOptionDialog(
+        int eleccion = JOptionPane.showOptionDialog(
                 this,           // Ventana padre (null si no está en un JFrame)
                 "que campo desea actualizar del cilindro",        // Mensaje del diálogo
                 "Edicion Cilindro",         // Título de la ventana
@@ -181,8 +181,10 @@ public class Dashboard extends JFrame {
                 opciones[0]     // Opción por defecto (la que tiene el foco)
         );
 
-        switch (seleccion) {
+        switch (eleccion) {
             case 0:
+                String newNumberSerial =  JOptionPane.showInputDialog(this, "ingresa el numero serial nuevo para este cilindro: ");
+
 
 
         }
